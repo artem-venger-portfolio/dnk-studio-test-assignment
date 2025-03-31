@@ -22,6 +22,7 @@ namespace ResourceLooter
         private ClickAndDragDetector _clickAndDragDetector;
         private MovePositionProvider _movePositionProvider;
         private ICoroutineController _coroutineController;
+        private CameraMover _cameraMover;
         private Player _player;
 
         private void Start()
@@ -42,6 +43,9 @@ namespace ResourceLooter
             var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController, _config);
             _player = new Player(playerMover);
             _player.Enable();
+
+            _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform);
+            _cameraMover.Enable();
         }
     }
 }
