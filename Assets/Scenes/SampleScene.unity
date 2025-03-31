@@ -167,6 +167,7 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _ground: {fileID: 1100961219}
   _playerObject: {fileID: 1318842048}
+  _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

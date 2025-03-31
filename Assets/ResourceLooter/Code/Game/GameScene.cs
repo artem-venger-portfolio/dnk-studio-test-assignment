@@ -16,6 +16,9 @@ namespace ResourceLooter
         [SerializeField]
         private Transform _playerObject;
 
+        [SerializeField]
+        private GameConfigSO _config;
+
         private MovePositionProvider _movePositionProvider;
         private Player _player;
 
