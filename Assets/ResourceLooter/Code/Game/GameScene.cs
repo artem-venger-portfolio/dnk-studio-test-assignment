@@ -44,7 +44,7 @@ namespace ResourceLooter
             _player = new Player(playerMover);
             _player.Enable();
 
-            _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform, _coroutineController);
+            _cameraMover = new CameraMover(_clickAndDragDetector, _camera, _coroutineController);
             _cameraMover.Enable();
         }
     }

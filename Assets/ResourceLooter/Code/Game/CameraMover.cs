@@ -7,11 +7,11 @@ namespace ResourceLooter
     {
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly ICoroutineController _coroutineController;
-        private readonly Transform _camera;
+        private readonly Camera _camera;
         private Coroutine _moveCoroutine;
         private bool _isDragging;
 
-        public CameraMover(ClickAndDragDetector clickAndDragDetector, Transform camera,
+        public CameraMover(ClickAndDragDetector clickAndDragDetector, Camera camera,
                            ICoroutineController coroutineController)
         {
             _clickAndDragDetector = clickAndDragDetector;
