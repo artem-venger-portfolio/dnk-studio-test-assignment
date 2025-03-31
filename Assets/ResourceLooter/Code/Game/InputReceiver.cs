@@ -15,7 +15,7 @@ namespace ResourceLooter
         {
             MovePressed?.Invoke();
         }
-        
+
         [UsedImplicitly]
         private void OnPointerPositionChanged(InputValue inputValue)
         {
