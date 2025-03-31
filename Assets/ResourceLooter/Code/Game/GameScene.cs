@@ -13,7 +13,11 @@ namespace ResourceLooter
         [SerializeField]
         private Transform _ground;
 
+        [SerializeField]
+        private Transform _playerObject;
+
         private MovePositionProvider _movePositionProvider;
+        private Player _player;
 
         private void Start()
         {
@@ -24,6 +28,8 @@ namespace ResourceLooter
         {
             _movePositionProvider = new MovePositionProvider(_inputReceiver, _camera, _ground);
             _movePositionProvider.Enable();
+            _player = new Player(_playerObject, _movePositionProvider);
+            _player.Enable();
         }
     }
 }
