@@ -5,12 +5,15 @@ namespace ResourceLooter
     public class Player
     {
         private readonly MovePositionProvider _movePositionProvider;
+        private readonly ICoroutineController _coroutineController;
         private readonly Transform _playerObject;
 
-        public Player(Transform playerObject, MovePositionProvider movePositionProvider)
+        public Player(Transform playerObject, MovePositionProvider movePositionProvider, 
+                      ICoroutineController coroutineController)
         {
             _playerObject = playerObject;
             _movePositionProvider = movePositionProvider;
+            _coroutineController = coroutineController;
         }
 
         public void Enable()
