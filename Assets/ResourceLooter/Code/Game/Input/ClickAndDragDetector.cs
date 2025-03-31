@@ -5,14 +5,16 @@ namespace ResourceLooter
     public class ClickAndDragDetector
     {
         private readonly InputReceiver _inputReceiver;
+        private readonly IGameConfig _gameConfig;
         private Vector2 _lastScreenPosition;
         private Vector2 _movePressPosition;
         private bool _isButtonPressed;
         private bool _isDragging;
 
-        public ClickAndDragDetector(InputReceiver inputReceiver)
+        public ClickAndDragDetector(InputReceiver inputReceiver, IGameConfig gameConfig)
         {
             _inputReceiver = inputReceiver;
+            _gameConfig = gameConfig;
         }
 
         public event ScreenPositionHandler Clicked;
@@ -91,8 +93,7 @@ namespace ResourceLooter
         private bool IsDragDistanceExceedThreshold()
         {
             var dragDistance = Vector2.Distance(_movePressPosition, _lastScreenPosition);
-            const float drag_threshold = 10f;
-            var isDragDistanceExceedThreshold = dragDistance < drag_threshold;
+            var isDragDistanceExceedThreshold = dragDistance < _gameConfig.DragThreshold;
 
             return isDragDistanceExceedThreshold;
         }

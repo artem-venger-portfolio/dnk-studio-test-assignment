@@ -33,7 +33,7 @@ namespace ResourceLooter
         {
             _coroutineController = CoroutineController.Create();
 
-            _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver);
+            _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
             _clickAndDragDetector.Enable();
 
             _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _ground);
