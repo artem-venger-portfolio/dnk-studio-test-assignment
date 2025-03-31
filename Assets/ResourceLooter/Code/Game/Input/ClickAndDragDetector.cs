@@ -36,11 +36,11 @@ namespace ResourceLooter
             _isButtonPressed = isPressed;
             if (_isButtonPressed == false)
             {
-                HandlePointerRelease();
+                ClickOrFinishDrag();
             }
         }
 
-        private void HandlePointerRelease()
+        private void ClickOrFinishDrag()
         {
             if (_isDragging)
             {
