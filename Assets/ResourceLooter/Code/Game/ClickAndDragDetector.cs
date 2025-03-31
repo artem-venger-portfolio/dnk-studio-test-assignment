@@ -5,6 +5,9 @@ namespace ResourceLooter
     public class ClickAndDragDetector
     {
         private readonly InputReceiver _inputReceiver;
+        private Vector2 _lastScreenPosition;
+        private bool _isButtonPressed;
+        private bool _isDragging;
 
         public ClickAndDragDetector(InputReceiver inputReceiver)
         {
@@ -30,10 +33,29 @@ namespace ResourceLooter
 
         private void MovePressedEventHandler(bool isPressed)
         {
+            _isButtonPressed = isPressed;
+            if (_isButtonPressed == false)
+            {
+                HandlePointerRelease();
+            }
+        }
+
+        private void HandlePointerRelease()
+        {
+            if (_isDragging)
+            {
+                _isDragging = false;
+                DragFinished?.Invoke(_lastScreenPosition);
+            }
+            else
+            {
+                Clicked?.Invoke(_lastScreenPosition);
+            }
         }
 
         private void PointerPositionChangedEventHandler(Vector2 position)
         {
+            _lastScreenPosition = position;
         }
     }
 }
