@@ -28,7 +28,7 @@ namespace ResourceLooter
             _inputReceiver.PointerPositionChanged -= PointerPositionChangedEventHandler;
         }
 
-        private void MovePressedEventHandler()
+        private void MovePressedEventHandler(bool isPressed)
         {
         }
 

@@ -31,10 +31,13 @@ namespace ResourceLooter
             _inputReceiver.PointerPositionChanged -= PointerPositionChanged;
         }
 
-        private void MovePressedEventHandler()
+        private void MovePressedEventHandler(bool isPressed)
         {
-            var lastWorldPosition = GetLastWorldPosition();
-            PositionChanged?.Invoke(lastWorldPosition);
+            if (isPressed)
+            {
+                var lastWorldPosition = GetLastWorldPosition();
+                PositionChanged?.Invoke(lastWorldPosition);
+            }
         }
 
         private Vector3 GetLastWorldPosition()

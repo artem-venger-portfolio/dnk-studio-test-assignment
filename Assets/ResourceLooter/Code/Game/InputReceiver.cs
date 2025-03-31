@@ -7,13 +7,13 @@ namespace ResourceLooter
 {
     public class InputReceiver : MonoBehaviour
     {
-        public event Action MovePressed;
+        public event Action<bool> MovePressed;
         public event Action<Vector2> PointerPositionChanged;
 
         [UsedImplicitly]
         private void OnMove(InputValue inputValue)
         {
-            MovePressed?.Invoke();
+            MovePressed?.Invoke(inputValue.isPressed);
         }
 
         [UsedImplicitly]
