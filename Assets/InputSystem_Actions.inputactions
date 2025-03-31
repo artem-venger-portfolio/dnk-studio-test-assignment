@@ -27,34 +27,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "bd4b114a-b911-4aed-87fd-8a03ce0a3f28",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9a646b55-115f-45cd-b1e8-48647d910a81",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Touch",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "56d0be56-7630-42f3-a1bd-984213e8b172",
                     "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch;Keyboard&Mouse",
                     "action": "PointerPositionChanged",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2b88827-abd0-4b0d-812c-c75ba5fc301d",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Touch",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
