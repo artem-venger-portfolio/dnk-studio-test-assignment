@@ -31,6 +31,12 @@ namespace ResourceLooter
             _movePositionProvider.PositionChanged -= PositionChangedEventHandler;
         }
 
+        private Vector3 PlayerPosition
+        {
+            get => _playerObject.position;
+            set => _playerObject.position = value;
+        }
+
         private void PositionChangedEventHandler(Vector3 position)
         {
             _targetPosition = position;
@@ -45,9 +51,33 @@ namespace ResourceLooter
 
         private IEnumerator GetMoveCoroutine()
         {
-            _playerObject.position = _targetPosition;
+            const float acceptable_distance = 0.0001f;
+
+            while (GetDistanceToTargetPosition() > acceptable_distance)
+            {
+                PlayerPosition += GetMoveDelta();
+                yield return null;
+            }
+
             _coroutine = null;
-            yield break;
+        }
+
+        private float GetDistanceToTargetPosition()
+        {
+            return Vector3.Distance(PlayerPosition, _targetPosition);
+        }
+
+        private Vector3 GetMoveDelta()
+        {
+            var distanceDeltaFromSpeedAndTime = _config.PlayerSpeed * Time.deltaTime;
+            var distanceToTargetPosition = GetDistanceToTargetPosition();
+            var distanceDelta = Mathf.Min(distanceDeltaFromSpeedAndTime, distanceToTargetPosition);
+
+            var direction = _targetPosition - PlayerPosition;
+            direction.Normalize();
+            var moveDelta = direction * distanceDelta;
+
+            return moveDelta;
         }
     }
 }
