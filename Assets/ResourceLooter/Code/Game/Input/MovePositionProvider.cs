@@ -6,11 +6,13 @@ namespace ResourceLooter
     public class MovePositionProvider
     {
         private readonly InputReceiver _inputReceiver;
+        private readonly Camera _camera;
         private Vector2 _lastScreenPosition;
 
-        public MovePositionProvider(InputReceiver inputReceiver)
+        public MovePositionProvider(InputReceiver inputReceiver, Camera camera)
         {
             _inputReceiver = inputReceiver;
+            _camera = camera;
         }
 
         public event Action<Vector3> PositionChanged;
@@ -29,8 +31,8 @@ namespace ResourceLooter
 
         private void MovePressedEventHandler()
         {
-            Debug.Log($"{nameof(MovePressedEventHandler)}: {_lastScreenPosition}");
-            PositionChanged?.Invoke(Vector3.zero);
+            var lastWorldPosition = _camera.ScreenToWorldPoint(_lastScreenPosition);
+            PositionChanged?.Invoke(lastWorldPosition);
         }
 
         private void PointerPositionChanged(Vector2 screenPosition)

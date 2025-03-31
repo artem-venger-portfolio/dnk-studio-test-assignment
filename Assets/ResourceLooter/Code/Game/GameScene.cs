@@ -19,7 +19,7 @@ namespace ResourceLooter
 
         public void StartGame()
         {
-            _movePositionProvider = new MovePositionProvider(_inputReceiver);
+            _movePositionProvider = new MovePositionProvider(_inputReceiver, _camera);
             _movePositionProvider.Enable();
         }
     }
