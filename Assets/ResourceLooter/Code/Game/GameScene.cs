@@ -20,6 +20,7 @@ namespace ResourceLooter
         private GameConfigSO _config;
 
         private MovePositionProvider _movePositionProvider;
+        private ICoroutineController _coroutineController;
         private Player _player;
 
         private void Start()
@@ -29,6 +30,7 @@ namespace ResourceLooter
 
         public void StartGame()
         {
+            _coroutineController = CoroutineController.Create();
             _movePositionProvider = new MovePositionProvider(_inputReceiver, _camera, _ground);
             _movePositionProvider.Enable();
             _player = new Player(_playerObject, _movePositionProvider);
