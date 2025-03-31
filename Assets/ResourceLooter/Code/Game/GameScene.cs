@@ -19,6 +19,7 @@ namespace ResourceLooter
         [SerializeField]
         private GameConfigSO _config;
 
+        private ClickAndDragDetector _clickAndDragDetector;
         private MovePositionProvider _movePositionProvider;
         private ICoroutineController _coroutineController;
         private Player _player;
@@ -31,8 +32,13 @@ namespace ResourceLooter
         public void StartGame()
         {
             _coroutineController = CoroutineController.Create();
+
             _movePositionProvider = new MovePositionProvider(_inputReceiver, _camera, _ground);
             _movePositionProvider.Enable();
+
+            _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver);
+            _clickAndDragDetector.Enable();
+
             var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController, _config);
             _player = new Player(playerMover);
             _player.Enable();
