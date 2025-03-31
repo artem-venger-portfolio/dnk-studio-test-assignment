@@ -9,6 +9,7 @@ namespace ResourceLooter
         private readonly ICoroutineController _coroutineController;
         private readonly Camera _camera;
         private Coroutine _moveCoroutine;
+        private Vector3 _startDragPosition;
         private Vector3 _targetPosition;
         private Vector3 _velocity;
         private bool _isDragging;
@@ -44,7 +45,20 @@ namespace ResourceLooter
         private void DragStartedEventHandler(Vector2 screenPosition)
         {
             _isDragging = true;
+            _startDragPosition = GetWorldPositionWithCameraY(screenPosition);
             RunMoveCoroutine();
+        }
+
+        private void DraggingEventHandler(Vector2 screenPosition)
+        {
+            var worldPosition = GetWorldPositionWithCameraY(screenPosition);
+            var delta = worldPosition - _startDragPosition;
+            _targetPosition = CameraPosition - delta;
+        }
+
+        private void DragFinishedEventHandler(Vector2 screenPosition)
+        {
+            _isDragging = false;
         }
 
         private void RunMoveCoroutine()
@@ -56,14 +70,12 @@ namespace ResourceLooter
             _moveCoroutine = _coroutineController.Run(GetMoveCoroutine());
         }
 
-        private void DraggingEventHandler(Vector2 screenPosition)
+        private Vector3 GetWorldPositionWithCameraY(Vector2 screenPosition)
         {
-            _targetPosition = _camera.ScreenToWorldPoint(screenPosition);
-        }
+            var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
+            worldPosition.y = CameraPosition.y;
 
-        private void DragFinishedEventHandler(Vector2 screenPosition)
-        {
-            _isDragging = false;
+            return worldPosition;
         }
 
         private IEnumerator GetMoveCoroutine()
