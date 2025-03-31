@@ -17,17 +17,24 @@ namespace ResourceLooter
         public void Enable()
         {
             _inputReceiver.MovePressed += MovePressedEventHandler;
+            _inputReceiver.PointerPositionChanged += PointerPositionChanged;
         }
 
         public void Disable()
         {
             _inputReceiver.MovePressed -= MovePressedEventHandler;
+            _inputReceiver.PointerPositionChanged -= PointerPositionChanged;
         }
 
         private void MovePressedEventHandler()
         {
             Debug.Log(nameof(MovePressedEventHandler));
             PositionChanged?.Invoke(Vector3.zero);
+        }
+
+        private void PointerPositionChanged(Vector2 screenPosition)
+        {
+            Debug.Log($"{nameof(PointerPositionChanged)}: {screenPosition.ToString()}");
         }
     }
 }
