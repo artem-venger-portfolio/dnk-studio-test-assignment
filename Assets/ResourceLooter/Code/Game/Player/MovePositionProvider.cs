@@ -5,14 +5,13 @@ namespace ResourceLooter
 {
     public class MovePositionProvider
     {
-        private readonly InputReceiver _inputReceiver;
+        private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly Camera _camera;
         private readonly Plane _plane;
-        private Vector2 _lastScreenPosition;
 
-        public MovePositionProvider(InputReceiver inputReceiver, Camera camera, Transform ground)
+        public MovePositionProvider(ClickAndDragDetector clickAndDragDetector, Camera camera, Transform ground)
         {
-            _inputReceiver = inputReceiver;
+            _clickAndDragDetector = clickAndDragDetector;
             _camera = camera;
             _plane = new Plane(ground.up, ground.position);
         }
@@ -21,40 +20,30 @@ namespace ResourceLooter
 
         public void Enable()
         {
-            _inputReceiver.MovePressed += MovePressedEventHandler;
-            _inputReceiver.PointerPositionChanged += PointerPositionChanged;
+            _clickAndDragDetector.Clicked += ClickEventHandler;
         }
 
         public void Disable()
         {
-            _inputReceiver.MovePressed -= MovePressedEventHandler;
-            _inputReceiver.PointerPositionChanged -= PointerPositionChanged;
+            _clickAndDragDetector.Clicked -= ClickEventHandler;
         }
 
-        private void MovePressedEventHandler(bool isPressed)
+        private void ClickEventHandler(Vector2 screenPosition)
         {
-            if (isPressed)
-            {
-                var lastWorldPosition = GetLastWorldPosition();
-                PositionChanged?.Invoke(lastWorldPosition);
-            }
+            var worldPosition = GetWorldPosition(screenPosition);
+            PositionChanged?.Invoke(worldPosition);
         }
 
-        private Vector3 GetLastWorldPosition()
+        private Vector3 GetWorldPosition(Vector2 screenPosition)
         {
-            var ray = _camera.ScreenPointToRay(_lastScreenPosition);
+            var ray = _camera.ScreenPointToRay(screenPosition);
             if (_plane.Raycast(ray, out var distance))
             {
                 return ray.GetPoint(distance);
             }
 
             throw new Exception("Can't get the corresponding world position for the " +
-                                $"last screen position {_lastScreenPosition}");
-        }
-
-        private void PointerPositionChanged(Vector2 screenPosition)
-        {
-            _lastScreenPosition = screenPosition;
+                                $"last screen position {screenPosition}");
         }
     }
 }
