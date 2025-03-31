@@ -7,6 +7,9 @@ namespace ResourceLooter
         [SerializeField]
         private InputReceiver _inputReceiver;
 
+        [SerializeField]
+        private Camera _camera;
+
         private MovePositionProvider _movePositionProvider;
 
         private void Start()
