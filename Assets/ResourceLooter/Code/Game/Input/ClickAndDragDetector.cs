@@ -6,6 +6,7 @@ namespace ResourceLooter
     {
         private readonly InputReceiver _inputReceiver;
         private Vector2 _lastScreenPosition;
+        private Vector2 _movePressPosition;
         private bool _isButtonPressed;
         private bool _isDragging;
 
@@ -34,10 +35,19 @@ namespace ResourceLooter
         private void MovePressedEventHandler(bool isPressed)
         {
             _isButtonPressed = isPressed;
-            if (_isButtonPressed == false)
+            if (_isButtonPressed)
+            {
+                RecordMovePressPosition();
+            }
+            else
             {
                 ClickOrFinishDrag();
             }
+        }
+
+        private void RecordMovePressPosition()
+        {
+            _movePressPosition = _lastScreenPosition;
         }
 
         private void ClickOrFinishDrag()
