@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputReceiver: {fileID: 2078388639}
   _camera: {fileID: 330585545}
+  _ground: {fileID: 1100961219}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

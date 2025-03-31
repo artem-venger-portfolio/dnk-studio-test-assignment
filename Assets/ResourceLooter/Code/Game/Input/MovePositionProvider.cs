@@ -10,11 +10,11 @@ namespace ResourceLooter
         private readonly Plane _plane;
         private Vector2 _lastScreenPosition;
 
-        public MovePositionProvider(InputReceiver inputReceiver, Camera camera)
+        public MovePositionProvider(InputReceiver inputReceiver, Camera camera, Transform ground)
         {
             _inputReceiver = inputReceiver;
             _camera = camera;
-            _plane = new Plane(Vector3.up, Vector3.zero);
+            _plane = new Plane(ground.up, ground.position);
         }
 
         public event Action<Vector3> PositionChanged;
