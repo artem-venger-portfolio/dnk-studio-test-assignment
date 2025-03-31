@@ -8,7 +8,7 @@ namespace ResourceLooter
     public class InputReceiver : MonoBehaviour
     {
         public event Action<bool> MovePressed;
-        public event Action<Vector2> PointerPositionChanged;
+        public event ScreenPositionHandler PointerPositionChanged;
 
         [UsedImplicitly]
         private void OnMove(InputValue inputValue)
