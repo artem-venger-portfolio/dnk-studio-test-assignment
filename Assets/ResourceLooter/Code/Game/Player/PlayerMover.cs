@@ -8,15 +8,17 @@ namespace ResourceLooter
         private readonly MovePositionProvider _movePositionProvider;
         private readonly ICoroutineController _coroutineController;
         private readonly Transform _playerObject;
+        private readonly IGameConfig _config;
         private Vector3 _targetPosition;
         private Coroutine _coroutine;
 
         public PlayerMover(Transform playerObject, MovePositionProvider movePositionProvider,
-                           ICoroutineController coroutineController)
+                           ICoroutineController coroutineController, IGameConfig config)
         {
             _playerObject = playerObject;
             _movePositionProvider = movePositionProvider;
             _coroutineController = coroutineController;
+            _config = config;
         }
 
         public void Enable()
