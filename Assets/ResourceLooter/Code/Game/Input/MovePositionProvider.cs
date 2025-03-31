@@ -6,6 +6,7 @@ namespace ResourceLooter
     public class MovePositionProvider
     {
         private readonly InputReceiver _inputReceiver;
+        private Vector2 _lastScreenPosition;
 
         public MovePositionProvider(InputReceiver inputReceiver)
         {
@@ -28,13 +29,13 @@ namespace ResourceLooter
 
         private void MovePressedEventHandler()
         {
-            Debug.Log(nameof(MovePressedEventHandler));
+            Debug.Log($"{nameof(MovePressedEventHandler)}: {_lastScreenPosition}");
             PositionChanged?.Invoke(Vector3.zero);
         }
 
         private void PointerPositionChanged(Vector2 screenPosition)
         {
-            Debug.Log($"{nameof(PointerPositionChanged)}: {screenPosition.ToString()}");
+            _lastScreenPosition = screenPosition;
         }
     }
 }
