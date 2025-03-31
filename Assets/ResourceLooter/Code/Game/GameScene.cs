@@ -33,7 +33,8 @@ namespace ResourceLooter
             _coroutineController = CoroutineController.Create();
             _movePositionProvider = new MovePositionProvider(_inputReceiver, _camera, _ground);
             _movePositionProvider.Enable();
-            _player = new Player(_playerObject, _movePositionProvider, _coroutineController);
+            var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController);
+            _player = new Player(playerMover);
             _player.Enable();
         }
     }
