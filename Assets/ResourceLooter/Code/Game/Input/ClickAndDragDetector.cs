@@ -54,8 +54,7 @@ namespace ResourceLooter
         {
             if (_isDragging)
             {
-                _isDragging = false;
-                DragFinished?.Invoke(_lastScreenPosition);
+                StopDragging();
             }
             else
             {
@@ -63,9 +62,50 @@ namespace ResourceLooter
             }
         }
 
+        private void StopDragging()
+        {
+            _isDragging = false;
+            DragFinished?.Invoke(_lastScreenPosition);
+        }
+
         private void PointerPositionChangedEventHandler(Vector2 position)
         {
             _lastScreenPosition = position;
+
+            if (CanStartDragging())
+            {
+                StartDragging();
+            }
+
+            if (CanInvokeDraggingEvent())
+            {
+                Dragging?.Invoke(_lastScreenPosition);
+            }
+        }
+
+        private bool CanStartDragging()
+        {
+            return _isButtonPressed && _isDragging == false && IsDragDistanceExceedThreshold();
+        }
+
+        private bool IsDragDistanceExceedThreshold()
+        {
+            var dragDistance = Vector2.Distance(_movePressPosition, _lastScreenPosition);
+            const float drag_threshold = 10f;
+            var isDragDistanceExceedThreshold = dragDistance < drag_threshold;
+
+            return isDragDistanceExceedThreshold;
+        }
+
+        private void StartDragging()
+        {
+            _isDragging = true;
+            DragStarted?.Invoke(_movePressPosition);
+        }
+
+        private bool CanInvokeDraggingEvent()
+        {
+            return _isButtonPressed && _isDragging;
         }
     }
 }
