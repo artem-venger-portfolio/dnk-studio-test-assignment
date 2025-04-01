@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ResourceLooter
 {
@@ -37,6 +38,7 @@ namespace ResourceLooter
         private Inventory _inventory;
         private Player _player;
         private ISaveManager _saveManager;
+        private ICloseWatcher _closeWatcher;
 
         private void Start()
         {
@@ -45,6 +47,9 @@ namespace ResourceLooter
 
         public void StartGame()
         {
+            _closeWatcher = CreateCloseWatcher();
+            _closeWatcher.Closing += ClosingEventHandler;
+
             _saveManager = new PlayerPrefsSaveManager();
             _saveManager.Load();
 
@@ -77,17 +82,28 @@ namespace ResourceLooter
             _settingsScreen.Initialize(_saveManager);
         }
 
+        private static ICloseWatcher CreateCloseWatcher()
+        {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            return WebGLCloseWatcher.Create();
+            #elif UNITY_ANDROID && !UNITY_EDITOR
+            return AndroidCloseWatcher.Create();
+            #else
+            return CommonCloseWatcher.Create();
+            #endif
+        }
+
+        private void ClosingEventHandler()
+        {
+            _saveManager.Save();
+        }
+
         private void SetFrameRate()
         {
             if (Application.isEditor == false)
             {
                 Application.targetFrameRate = 60;
             }
-        }
-
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            _saveManager.Save();
         }
     }
 }
