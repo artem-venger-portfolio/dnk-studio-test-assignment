@@ -14,9 +14,9 @@ namespace System
             return closeWatcher;
         }
 
-        private void OnApplicationFocus(bool hasFocus)
+        private void OnApplicationPause(bool isPaused)
         {
-            if (hasFocus == false)
+            if (isPaused)
             {
                 Closing?.Invoke();
             }
