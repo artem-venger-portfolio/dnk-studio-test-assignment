@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace ResourceLooter
@@ -47,13 +48,13 @@ namespace ResourceLooter
         private void DragStartedEventHandler(Vector2 screenPosition)
         {
             _isDragging = true;
-            _startDragPosition = GetWorldPositionWithCameraY(screenPosition);
+            _startDragPosition = GetWorldPosition(screenPosition);
             RunMoveCoroutine();
         }
 
         private void DraggingEventHandler(Vector2 screenPosition)
         {
-            var worldPosition = GetWorldPositionWithCameraY(screenPosition);
+            var worldPosition = GetWorldPosition(screenPosition);
             var delta = worldPosition - _startDragPosition;
             _targetPosition = CameraPosition - delta;
         }
@@ -72,12 +73,15 @@ namespace ResourceLooter
             _moveCoroutine = _coroutineController.Run(GetMoveCoroutine());
         }
 
-        private Vector3 GetWorldPositionWithCameraY(Vector2 screenPosition)
+        private Vector3 GetWorldPosition(Vector2 screenPosition)
         {
-            var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
-            worldPosition.y = CameraPosition.y;
+            var ray = _camera.ScreenPointToRay(screenPosition);
+            if (_ground.Raycast(ray, out var distance))
+            {
+                return ray.GetPoint(distance);
+            }
 
-            return worldPosition;
+            throw new Exception($"Can't get the corresponding world position for the screen position {screenPosition}");
         }
 
         private IEnumerator GetMoveCoroutine()
