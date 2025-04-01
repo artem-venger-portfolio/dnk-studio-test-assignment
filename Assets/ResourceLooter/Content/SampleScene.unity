@@ -167,7 +167,7 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _ground: {fileID: 1100961219}
   _playerObject: {fileID: 1318842048}
-  _characterController: {fileID: 2011686140}
+  _characterController: {fileID: 0}
   _animator: {fileID: 228560643}
   _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
 --- !u!4 &228560642 stripped
@@ -556,6 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318842048}
+  - component: {fileID: 1318842049}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -579,11 +580,31 @@ Transform:
   - {fileID: 228560642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &2011686140 stripped
+--- !u!143 &1318842049
 CharacterController:
-  m_CorrespondingSourceObject: {fileID: 1317766777402477963, guid: a90430005d718c64fb5dd01d301d68bb, type: 3}
-  m_PrefabInstance: {fileID: 2110438779985275481}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318842047}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2078388636
 GameObject:
   m_ObjectHideFlags: 0
