@@ -8,13 +8,19 @@ namespace ResourceLooter
 
         public void Modify(ResourceType resource, int additionalValue)
         {
-            _resources.TryAdd(resource, 0);
+            AddResourceIfNeeded(resource);
             _resources[resource] += additionalValue;
         }
 
         public int Get(ResourceType resource)
         {
+            AddResourceIfNeeded(resource);
             return _resources[resource];
+        }
+
+        private void AddResourceIfNeeded(ResourceType resource)
+        {
+            _resources.TryAdd(resource, value: 0);
         }
     }
 }
