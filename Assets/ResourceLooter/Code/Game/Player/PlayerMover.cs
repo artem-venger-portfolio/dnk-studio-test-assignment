@@ -5,30 +5,33 @@ namespace ResourceLooter
 {
     public class PlayerMover
     {
-        private readonly MovePositionProvider _movePositionProvider;
+        private readonly ClickAndDragDetector _clickAndDragDetector;
+        private readonly GroundPointFinder _groundPointFinder;
         private readonly ICoroutineController _coroutineController;
         private readonly Transform _playerObject;
         private readonly IGameConfig _config;
         private Vector3 _targetPosition;
         private Coroutine _coroutine;
 
-        public PlayerMover(Transform playerObject, MovePositionProvider movePositionProvider,
-                           ICoroutineController coroutineController, IGameConfig config)
+        public PlayerMover(Transform playerObject, ClickAndDragDetector clickAndDragDetector,
+                           GroundPointFinder groundPointFinder, ICoroutineController coroutineController,
+                           IGameConfig config)
         {
             _playerObject = playerObject;
-            _movePositionProvider = movePositionProvider;
+            _clickAndDragDetector = clickAndDragDetector;
+            _groundPointFinder = groundPointFinder;
             _coroutineController = coroutineController;
             _config = config;
         }
 
         public void Enable()
         {
-            _movePositionProvider.PositionChanged += PositionChangedEventHandler;
+            _clickAndDragDetector.Clicked += ClickEventHandler;
         }
 
         public void Disable()
         {
-            _movePositionProvider.PositionChanged -= PositionChangedEventHandler;
+            _clickAndDragDetector.Clicked -= ClickEventHandler;
         }
 
         private Vector3 PlayerPosition
@@ -37,9 +40,9 @@ namespace ResourceLooter
             set => _playerObject.position = value;
         }
 
-        private void PositionChangedEventHandler(Vector3 position)
+        private void ClickEventHandler(Vector2 screenPosition)
         {
-            _targetPosition = position;
+            _targetPosition = _groundPointFinder.FindPointFromScreenPoint(screenPosition);
 
             if (_coroutine != null)
             {

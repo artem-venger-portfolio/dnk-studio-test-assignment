@@ -20,7 +20,6 @@ namespace ResourceLooter
         private GameConfigSO _config;
 
         private ClickAndDragDetector _clickAndDragDetector;
-        private MovePositionProvider _movePositionProvider;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
         private CameraMover _cameraMover;
@@ -40,10 +39,8 @@ namespace ResourceLooter
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
-            _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _groundPointFinder);
-            _movePositionProvider.Enable();
-
-            var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController, _config);
+            var playerMover = new PlayerMover(_playerObject, _clickAndDragDetector, _groundPointFinder,
+                                              _coroutineController, _config);
             _player = new Player(playerMover);
             _player.Enable();
 
