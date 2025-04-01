@@ -169,6 +169,12 @@ MonoBehaviour:
   _characterController: {fileID: 1318842049}
   _animator: {fileID: 228560643}
   _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
+  _buildings:
+  - {fileID: 8626305263958821326}
+  - {fileID: 8626305263822641401}
+  - {fileID: 8626305262112656514}
+  - {fileID: 8626305263200227938}
+  - {fileID: 8626305262911839593}
 --- !u!4 &228560642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2895895422078365786, guid: a90430005d718c64fb5dd01d301d68bb, type: 3}

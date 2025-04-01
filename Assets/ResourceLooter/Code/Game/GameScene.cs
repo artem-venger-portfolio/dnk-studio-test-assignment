@@ -22,6 +22,9 @@ namespace ResourceLooter
         [SerializeField]
         private GameConfigSO _config;
 
+        [SerializeField]
+        private BuildingBase[] _buildings;
+
         private ClickAndDragDetector _clickAndDragDetector;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
@@ -42,7 +45,7 @@ namespace ResourceLooter
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
-            var playerMover = new PlayerMover(_characterController, _clickAndDragDetector, _groundPointFinder, 
+            var playerMover = new PlayerMover(_characterController, _clickAndDragDetector, _groundPointFinder,
                                               _coroutineController, _config.PlayerConfig);
             var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _animator);
             _player = new Player(playerMover, playerAnimationSwitcher);
@@ -51,6 +54,11 @@ namespace ResourceLooter
             _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform, _coroutineController,
                                            _groundPointFinder, _config.CameraConfig);
             _cameraMover.Enable();
+
+            foreach (var currentBuilding in _buildings)
+            {
+                currentBuilding.Initialize(_config);
+            }
         }
     }
 }
