@@ -5,9 +5,6 @@ namespace ResourceLooter
     public class GameScene : MonoBehaviour
     {
         [SerializeField]
-        private InputReceiver _inputReceiver;
-
-        [SerializeField]
         private Camera _camera;
 
         [SerializeField]
@@ -34,7 +31,6 @@ namespace ResourceLooter
         [SerializeField]
         private InputCatchingScreen _inputCatchingScreen;
 
-        private ClickAndDragDetector _clickAndDragDetector;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
         private CameraMover _cameraMover;
@@ -53,9 +49,6 @@ namespace ResourceLooter
             _saveManager.Load();
 
             _coroutineController = CoroutineController.Create();
-
-            _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
-            _clickAndDragDetector.Enable();
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
