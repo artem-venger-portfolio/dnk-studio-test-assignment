@@ -7,13 +7,13 @@ namespace ResourceLooter
     {
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly Camera _camera;
-        private readonly Plane _plane;
+        private readonly Plane _ground;
 
-        public MovePositionProvider(ClickAndDragDetector clickAndDragDetector, Camera camera, Transform ground)
+        public MovePositionProvider(ClickAndDragDetector clickAndDragDetector, Camera camera, Plane ground)
         {
             _clickAndDragDetector = clickAndDragDetector;
             _camera = camera;
-            _plane = new Plane(ground.up, ground.position);
+            _ground = ground;
         }
 
         public event Action<Vector3> PositionChanged;
@@ -37,7 +37,7 @@ namespace ResourceLooter
         private Vector3 GetWorldPosition(Vector2 screenPosition)
         {
             var ray = _camera.ScreenPointToRay(screenPosition);
-            if (_plane.Raycast(ray, out var distance))
+            if (_ground.Raycast(ray, out var distance))
             {
                 return ray.GetPoint(distance);
             }

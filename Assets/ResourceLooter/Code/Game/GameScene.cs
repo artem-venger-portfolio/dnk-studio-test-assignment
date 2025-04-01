@@ -24,6 +24,7 @@ namespace ResourceLooter
         private ICoroutineController _coroutineController;
         private CameraMover _cameraMover;
         private Player _player;
+        private Plane _groundPlane;
 
         private void Start()
         {
@@ -37,7 +38,9 @@ namespace ResourceLooter
             _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
             _clickAndDragDetector.Enable();
 
-            _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _ground);
+            _groundPlane = new Plane(_ground.up, _ground.position);
+
+            _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _groundPlane);
             _movePositionProvider.Enable();
 
             var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController, _config);
