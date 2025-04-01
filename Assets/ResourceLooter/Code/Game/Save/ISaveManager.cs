@@ -2,8 +2,8 @@
 {
     public interface ISaveManager
     {
+        bool IsMusicOn { get; set; }
         void Load();
         void Save();
-        void SetInMusicOn(bool value);
     }
 }

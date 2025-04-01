@@ -7,6 +7,12 @@ namespace ResourceLooter
         private const string KEY = "SaveData";
         private SaveData _saveData;
 
+        public bool IsMusicOn
+        {
+            get => _saveData.IsMusicOn;
+            set => _saveData.IsMusicOn = value;
+        }
+
         public void Load()
         {
             var saveDataJson = PlayerPrefs.GetString(KEY);
@@ -19,11 +25,6 @@ namespace ResourceLooter
         {
             var saveDataJson = JsonUtility.ToJson(_saveData);
             PlayerPrefs.SetString(KEY, saveDataJson);
-        }
-
-        public void SetInMusicOn(bool value)
-        {
-            _saveData.IsMusicOn = value;
         }
     }
 }

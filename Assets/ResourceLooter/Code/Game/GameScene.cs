@@ -77,7 +77,7 @@ namespace ResourceLooter
 
             _hud.Initialize(_inventoryScreen, _settingsScreen);
             _inventoryScreen.Initialize(_inventory);
-            _settingsScreen.Initialize();
+            _settingsScreen.Initialize(_saveManager);
         }
 
         private void OnDisable()
