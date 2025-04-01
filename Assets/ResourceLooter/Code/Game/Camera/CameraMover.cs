@@ -8,6 +8,7 @@ namespace ResourceLooter
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly ICoroutineController _coroutineController;
         private readonly GroundPointFinder _groundPointFinder;
+        private readonly CameraConfig _config;
         private readonly Transform _camera;
         private Coroutine _moveCoroutine;
         private Vector3 _startDragPosition;
@@ -16,11 +17,13 @@ namespace ResourceLooter
         private bool _isDragging;
 
         public CameraMover(ClickAndDragDetector clickAndDragDetector, Transform camera,
-                           ICoroutineController coroutineController, GroundPointFinder groundPointFinder)
+                           ICoroutineController coroutineController, GroundPointFinder groundPointFinder,
+                           CameraConfig config)
         {
             _clickAndDragDetector = clickAndDragDetector;
             _coroutineController = coroutineController;
             _groundPointFinder = groundPointFinder;
+            _config = config;
             _camera = camera;
         }
 
@@ -89,8 +92,8 @@ namespace ResourceLooter
                 var isOnTarget = distanceToTarget < acceptable_distance;
                 if (isOnTarget == false)
                 {
-                    const float follow_time = 0.5f;
-                    CameraPosition = Vector3.SmoothDamp(CameraPosition, _targetPosition, ref _velocity, follow_time);
+                    CameraPosition = Vector3.SmoothDamp(CameraPosition, _targetPosition, ref _velocity,
+                                                        _config.FollowTime);
                 }
 
                 yield return null;
@@ -98,13 +101,11 @@ namespace ResourceLooter
 
             var acceleration = Vector3.zero;
             const float max_acceleration = float.PositiveInfinity;
-            const float min_deceleration_velocity = 0.5f;
-            while (_velocity.magnitude > min_deceleration_velocity)
+            while (_velocity.magnitude > _config.MinDecelerationVelocity)
             {
                 var deltaTime = Time.deltaTime;
                 CameraPosition += _velocity * deltaTime;
-                const float deceleration_time = 1f;
-                _velocity = Vector3.SmoothDamp(_velocity, Vector3.zero, ref acceleration, deceleration_time,
+                _velocity = Vector3.SmoothDamp(_velocity, Vector3.zero, ref acceleration, _config.DecelerationTime,
                                                max_acceleration, deltaTime);
                 yield return null;
             }

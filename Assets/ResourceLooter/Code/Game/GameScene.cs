@@ -45,7 +45,7 @@ namespace ResourceLooter
             _player.Enable();
 
             _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform, _coroutineController,
-                                           _groundPointFinder);
+                                           _groundPointFinder, _config.CameraConfig);
             _cameraMover.Enable();
         }
     }
