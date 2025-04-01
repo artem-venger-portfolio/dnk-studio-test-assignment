@@ -5,5 +5,6 @@
         public float PlayerSpeed { get; }
         float DragThreshold { get; }
         CameraConfig CameraConfig { get; }
+        PlayerConfig PlayerConfig { get; }
     }
 }
