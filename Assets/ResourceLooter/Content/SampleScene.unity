@@ -166,8 +166,7 @@ MonoBehaviour:
   _inputReceiver: {fileID: 2078388639}
   _camera: {fileID: 330585545}
   _ground: {fileID: 1100961219}
-  _characterController: {fileID: 1318842049}
-  _animator: {fileID: 228560643}
+  _playerView: {fileID: 1318842050}
   _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
   _buildings:
   - {fileID: 8626305263958821326}

@@ -14,10 +14,7 @@ namespace ResourceLooter
         private Transform _ground;
 
         [SerializeField]
-        private CharacterController _characterController;
-
-        [SerializeField]
-        private Animator _animator;
+        private PlayerView _playerView;
 
         [SerializeField]
         private GameConfigSO _config;
@@ -45,9 +42,9 @@ namespace ResourceLooter
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
-            var playerMover = new PlayerMover(_characterController, _clickAndDragDetector, _groundPointFinder,
-                                              _coroutineController, _config.PlayerConfig);
-            var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _animator);
+            var playerMover = new PlayerMover(_playerView.CharacterController, _clickAndDragDetector,
+                                              _groundPointFinder, _coroutineController, _config.PlayerConfig);
+            var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _playerView.Animator);
             _player = new Player(playerMover, playerAnimationSwitcher);
             _player.Enable();
 
