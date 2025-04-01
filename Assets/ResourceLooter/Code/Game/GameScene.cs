@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ResourceLooter
 {
@@ -52,7 +51,7 @@ namespace ResourceLooter
         {
             _saveManager = new PlayerPrefsSaveManager();
             _saveManager.Load();
-            
+
             _coroutineController = CoroutineController.Create();
 
             _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
@@ -62,8 +61,8 @@ namespace ResourceLooter
 
             _inventory = new Inventory();
 
-            var playerMover = new PlayerMover(_playerView.CharacterController, _clickAndDragDetector,
-                                              _groundPointFinder, _coroutineController, _config.PlayerConfig);
+            var playerMover = new PlayerMover(_playerView.CharacterController, _groundPointFinder, _coroutineController,
+                                              _config.PlayerConfig, _inputCatchingScreen);
             var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _playerView.Animator);
             var resourceExtractor = new ResourceExtractor(_playerView, _coroutineController);
             _player = new Player(playerMover, playerAnimationSwitcher, resourceExtractor);

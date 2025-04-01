@@ -6,27 +6,27 @@ namespace ResourceLooter
 {
     public class PlayerMover
     {
-        private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly GroundPointFinder _groundPointFinder;
         private readonly ICoroutineController _coroutineController;
         private readonly CharacterController _characterController;
         private readonly Transform _playerTransform;
         private readonly PlayerConfig _config;
+        private readonly InputCatchingScreen _inputCatchingScreen;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
         private Coroutine _moveCoroutine;
         private Coroutine _rotateCoroutine;
 
-        public PlayerMover(CharacterController characterController, ClickAndDragDetector clickAndDragDetector, 
-                           GroundPointFinder groundPointFinder, ICoroutineController coroutineController, 
-                           PlayerConfig config)
+        public PlayerMover(CharacterController characterController, GroundPointFinder groundPointFinder,
+                           ICoroutineController coroutineController, PlayerConfig config,
+                           InputCatchingScreen inputCatchingScreen)
         {
             _playerTransform = characterController.transform;
             _characterController = characterController;
-            _clickAndDragDetector = clickAndDragDetector;
             _groundPointFinder = groundPointFinder;
             _coroutineController = coroutineController;
             _config = config;
+            _inputCatchingScreen = inputCatchingScreen;
         }
 
         public event Action MovementStarted;
@@ -35,12 +35,12 @@ namespace ResourceLooter
 
         public void Enable()
         {
-            _clickAndDragDetector.Clicked += ClickEventHandler;
+            _inputCatchingScreen.Clicked += ClickEventHandler;
         }
 
         public void Disable()
         {
-            _clickAndDragDetector.Clicked -= ClickEventHandler;
+            _inputCatchingScreen.Clicked -= ClickEventHandler;
         }
 
         private Vector3 PlayerPosition => _playerTransform.position;
@@ -115,7 +115,7 @@ namespace ResourceLooter
             var targetPositionWithPlayerY = _targetPosition;
             targetPositionWithPlayerY.y = PlayerPosition.y;
             var distance = Vector3.Distance(PlayerPosition, targetPositionWithPlayerY);
-            
+
             return distance;
         }
 
