@@ -22,6 +22,9 @@ namespace ResourceLooter
         [SerializeField]
         private BuildingBase[] _buildings;
 
+        [SerializeField]
+        private HUD _hud;
+
         private ClickAndDragDetector _clickAndDragDetector;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
