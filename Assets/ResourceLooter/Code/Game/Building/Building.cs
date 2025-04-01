@@ -2,7 +2,7 @@
 
 namespace ResourceLooter
 {
-    public class Building : MonoBehaviour
+    public class Building : BuildingBase
     {
         [SerializeField]
         private ResourceType _produce;
@@ -11,7 +11,7 @@ namespace ResourceLooter
         private IGameConfig _config;
         private float _elapsedTime;
 
-        public void Initialize(IGameConfig config)
+        public override void Initialize(IGameConfig config)
         {
             _config = config;
         }
