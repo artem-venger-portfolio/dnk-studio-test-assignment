@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ResourceLooter
 {
@@ -6,6 +7,12 @@ namespace ResourceLooter
     {
         [SerializeField]
         private InventoryEntry _entryTemplate;
+
+        [SerializeField]
+        private Transform _scrollContent;
+
+        [SerializeField]
+        private Button _closeButton;
 
         private Inventory _inventory;
 
