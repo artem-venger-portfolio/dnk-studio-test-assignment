@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace ResourceLooter
@@ -23,6 +24,10 @@ namespace ResourceLooter
             _coroutineController = coroutineController;
             _config = config;
         }
+
+        public event Action MovementStarted;
+
+        public event Action MovementFinished;
 
         public void Enable()
         {
