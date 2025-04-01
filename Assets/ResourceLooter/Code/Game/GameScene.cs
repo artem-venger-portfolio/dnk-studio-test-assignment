@@ -32,6 +32,9 @@ namespace ResourceLooter
         [SerializeField]
         private SettingsScreen _settingsScreen;
 
+        [SerializeField]
+        private InputCatchingScreen _inputCatchingScreen;
+
         private ClickAndDragDetector _clickAndDragDetector;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
