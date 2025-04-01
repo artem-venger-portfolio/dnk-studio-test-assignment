@@ -5,7 +5,7 @@ namespace ResourceLooter
 {
     public class CameraMover
     {
-        private readonly ClickAndDragDetector _clickAndDragDetector;
+        private readonly InputCatchingScreen _inputCatchingScreen;
         private readonly ICoroutineController _coroutineController;
         private readonly GroundPointFinder _groundPointFinder;
         private readonly CameraConfig _config;
@@ -16,11 +16,11 @@ namespace ResourceLooter
         private Vector3 _velocity;
         private bool _isDragging;
 
-        public CameraMover(ClickAndDragDetector clickAndDragDetector, Transform camera,
+        public CameraMover(InputCatchingScreen inputCatchingScreen, Transform camera,
                            ICoroutineController coroutineController, GroundPointFinder groundPointFinder,
                            CameraConfig config)
         {
-            _clickAndDragDetector = clickAndDragDetector;
+            _inputCatchingScreen = inputCatchingScreen;
             _coroutineController = coroutineController;
             _groundPointFinder = groundPointFinder;
             _config = config;
@@ -29,16 +29,16 @@ namespace ResourceLooter
 
         public void Enable()
         {
-            _clickAndDragDetector.DragStarted += DragStartedEventHandler;
-            _clickAndDragDetector.Dragging += DraggingEventHandler;
-            _clickAndDragDetector.DragFinished += DragFinishedEventHandler;
+            _inputCatchingScreen.DragStarted += DragStartedEventHandler;
+            _inputCatchingScreen.Dragging += DraggingEventHandler;
+            _inputCatchingScreen.DragFinished += DragFinishedEventHandler;
         }
 
         public void Disable()
         {
-            _clickAndDragDetector.DragStarted -= DragStartedEventHandler;
-            _clickAndDragDetector.Dragging -= DraggingEventHandler;
-            _clickAndDragDetector.DragFinished -= DragFinishedEventHandler;
+            _inputCatchingScreen.DragStarted -= DragStartedEventHandler;
+            _inputCatchingScreen.Dragging -= DraggingEventHandler;
+            _inputCatchingScreen.DragFinished -= DragFinishedEventHandler;
         }
 
         private Vector3 CameraPosition

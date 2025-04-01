@@ -68,7 +68,7 @@ namespace ResourceLooter
             _player = new Player(playerMover, playerAnimationSwitcher, resourceExtractor);
             _player.Enable();
 
-            _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform, _coroutineController,
+            _cameraMover = new CameraMover(_inputCatchingScreen, _camera.transform, _coroutineController,
                                            _groundPointFinder, _config.CameraConfig);
             _cameraMover.Enable();
 
