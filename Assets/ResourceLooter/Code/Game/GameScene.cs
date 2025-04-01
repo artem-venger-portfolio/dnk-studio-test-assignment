@@ -70,7 +70,7 @@ namespace ResourceLooter
                 currentBuilding.Initialize(_inventory, _config);
             }
 
-            _hud.Initialize(_inventoryScreen);
+            _hud.Initialize(_inventoryScreen, _settingsScreen);
             _inventoryScreen.Initialize(_inventory);
             _settingsScreen.Initialize();
         }
