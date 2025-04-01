@@ -101,7 +101,7 @@ namespace ResourceLooter
         {
             MovementStarted?.Invoke();
 
-            const float acceptable_distance = 0.0001f;
+            const float acceptable_distance = 0.001f;
             while (GetDistanceToTargetPosition() > acceptable_distance)
             {
                 var motion = GetMoveDelta();
@@ -115,7 +115,11 @@ namespace ResourceLooter
 
         private float GetDistanceToTargetPosition()
         {
-            return Vector3.Distance(PlayerPosition, _targetPosition);
+            var targetPositionWithPlayerY = _targetPosition;
+            targetPositionWithPlayerY.y = PlayerPosition.y;
+            var distance = Vector3.Distance(PlayerPosition, targetPositionWithPlayerY);
+            
+            return distance;
         }
 
         private Vector3 GetMoveDelta()
@@ -133,6 +137,7 @@ namespace ResourceLooter
         private Vector3 GetMoveDirection()
         {
             var direction = _targetPosition - PlayerPosition;
+            direction.y = 0;
             direction.Normalize();
 
             return direction;
