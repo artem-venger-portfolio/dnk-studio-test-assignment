@@ -26,6 +26,7 @@ namespace ResourceLooter
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
         private CameraMover _cameraMover;
+        private Inventory _inventory;
         private Player _player;
 
         private void Start()
@@ -41,6 +42,8 @@ namespace ResourceLooter
             _clickAndDragDetector.Enable();
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
+
+            _inventory = new Inventory();
 
             var playerMover = new PlayerMover(_playerView.CharacterController, _clickAndDragDetector,
                                               _groundPointFinder, _coroutineController, _config.PlayerConfig);
