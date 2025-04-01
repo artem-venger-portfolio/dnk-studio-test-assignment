@@ -12,7 +12,7 @@ namespace ResourceLooter
         private readonly Transform _playerObject;
         private readonly IGameConfig _config;
         private Vector3 _targetPosition;
-        private Coroutine _coroutine;
+        private Coroutine _moveCoroutine;
 
         public PlayerMover(Transform playerObject, ClickAndDragDetector clickAndDragDetector,
                            GroundPointFinder groundPointFinder, ICoroutineController coroutineController,
@@ -49,7 +49,7 @@ namespace ResourceLooter
         {
             _targetPosition = _groundPointFinder.FindPointFromScreenPoint(screenPosition);
 
-            _coroutine ??= _coroutineController.Run(GetMoveCoroutine());
+            _moveCoroutine ??= _coroutineController.Run(GetMoveCoroutine());
         }
 
         private IEnumerator GetMoveCoroutine()
@@ -63,7 +63,7 @@ namespace ResourceLooter
                 yield return null;
             }
 
-            _coroutine = null;
+            _moveCoroutine = null;
             MovementFinished?.Invoke();
         }
 
