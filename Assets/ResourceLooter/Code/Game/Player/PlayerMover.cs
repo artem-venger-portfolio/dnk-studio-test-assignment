@@ -54,8 +54,9 @@ namespace ResourceLooter
 
         private IEnumerator GetMoveCoroutine()
         {
-            const float acceptable_distance = 0.0001f;
+            MovementStarted?.Invoke();
 
+            const float acceptable_distance = 0.0001f;
             while (GetDistanceToTargetPosition() > acceptable_distance)
             {
                 PlayerPosition += GetMoveDelta();
