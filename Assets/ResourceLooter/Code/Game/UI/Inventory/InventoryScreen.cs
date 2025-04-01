@@ -19,6 +19,12 @@ namespace ResourceLooter
         public void Initialize(Inventory inventory)
         {
             _inventory = inventory;
+            _closeButton.onClick.AddListener(CloseButtonClickedEventHandler);
+        }
+
+        private void CloseButtonClickedEventHandler()
+        {
+            Close();
         }
     }
 }
