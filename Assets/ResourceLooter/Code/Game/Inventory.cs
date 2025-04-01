@@ -8,6 +8,7 @@ namespace ResourceLooter
 
         public void Modify(ResourceType resource, int additionalValue)
         {
+            _resources.TryAdd(resource, 0);
             _resources[resource] += additionalValue;
         }
 
