@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameConfigSO
   m_EditorClassIdentifier: 
   _config:
+    ProductionTime: 5
     DragThreshold: 10
     CameraConfig:
       _followTime: 0.5

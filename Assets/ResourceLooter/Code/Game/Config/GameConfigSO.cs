@@ -10,6 +10,8 @@ namespace ResourceLooter
 
         private const string TYPE_NAME = nameof(GameConfigSO);
 
+        public float ProductionTime => _config.ProductionTime;
+
         public float DragThreshold => _config.DragThreshold;
 
         public CameraConfig CameraConfig => _config.CameraConfig;
