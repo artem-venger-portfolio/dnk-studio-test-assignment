@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace ResourceLooter
@@ -8,20 +7,20 @@ namespace ResourceLooter
     {
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly ICoroutineController _coroutineController;
-        private readonly Plane _ground;
-        private readonly Camera _camera;
+        private readonly GroundPointFinder _groundPointFinder;
+        private readonly Transform _camera;
         private Coroutine _moveCoroutine;
         private Vector3 _startDragPosition;
         private Vector3 _targetPosition;
         private Vector3 _velocity;
         private bool _isDragging;
 
-        public CameraMover(ClickAndDragDetector clickAndDragDetector, Camera camera,
-                           ICoroutineController coroutineController, Plane ground)
+        public CameraMover(ClickAndDragDetector clickAndDragDetector, Transform camera,
+                           ICoroutineController coroutineController, GroundPointFinder groundPointFinder)
         {
             _clickAndDragDetector = clickAndDragDetector;
             _coroutineController = coroutineController;
-            _ground = ground;
+            _groundPointFinder = groundPointFinder;
             _camera = camera;
         }
 
@@ -75,13 +74,7 @@ namespace ResourceLooter
 
         private Vector3 GetWorldPosition(Vector2 screenPosition)
         {
-            var ray = _camera.ScreenPointToRay(screenPosition);
-            if (_ground.Raycast(ray, out var distance))
-            {
-                return ray.GetPoint(distance);
-            }
-
-            throw new Exception($"Can't get the corresponding world position for the screen position {screenPosition}");
+            return _groundPointFinder.FindPointFromScreenPoint(screenPosition);
         }
 
         private IEnumerator GetMoveCoroutine()
