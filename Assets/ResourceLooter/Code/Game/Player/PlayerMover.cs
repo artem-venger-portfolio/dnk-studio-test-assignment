@@ -68,6 +68,7 @@ namespace ResourceLooter
             }
 
             _coroutine = null;
+            MovementFinished?.Invoke();
         }
 
         private float GetDistanceToTargetPosition()
