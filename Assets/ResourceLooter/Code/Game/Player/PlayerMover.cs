@@ -43,10 +43,7 @@ namespace ResourceLooter
             _clickAndDragDetector.Clicked -= ClickEventHandler;
         }
 
-        private Vector3 PlayerPosition
-        {
-            get => _playerTransform.position;
-        }
+        private Vector3 PlayerPosition => _playerTransform.position;
 
         private Quaternion PlayerRotation
         {
