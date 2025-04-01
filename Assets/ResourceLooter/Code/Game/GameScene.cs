@@ -85,7 +85,7 @@ namespace ResourceLooter
             }
         }
 
-        private void OnDisable()
+        private void OnApplicationPause(bool pauseStatus)
         {
             _saveManager.Save();
         }
