@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ResourceLooter
 {
@@ -60,8 +62,24 @@ namespace ResourceLooter
             }
             else
             {
-                Clicked?.Invoke(_lastScreenPosition);
+                if (IsPointerOverUI() == false)
+                {
+                    Clicked?.Invoke(_lastScreenPosition);
+                }
             }
+        }
+
+        private bool IsPointerOverUI()
+        {
+            var eventSystem = EventSystem.current;
+            var eventData = new PointerEventData(eventSystem)
+            {
+                position = _lastScreenPosition,
+            };
+            var results = new List<RaycastResult>();
+            eventSystem.RaycastAll(eventData, results);
+
+            return results.Count > 0;
         }
 
         private void StopDragging()
