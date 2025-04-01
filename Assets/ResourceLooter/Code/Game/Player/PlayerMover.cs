@@ -89,7 +89,9 @@ namespace ResourceLooter
             var angleDeltaFromSpeedAndTime = _config.RotationSpeed * Time.deltaTime;
             var angleToTargetRotation = GetAngleToTargetRotation();
             var angleDelta = Mathf.Min(angleDeltaFromSpeedAndTime, angleToTargetRotation);
-            var rotationDelta = Quaternion.AngleAxis(angleDelta, _playerObject.up);
+
+            var rotationAxis = Vector3.Cross(_playerObject.forward, GetMoveDirection());
+            var rotationDelta = Quaternion.AngleAxis(angleDelta, rotationAxis);
 
             return rotationDelta;
         }
