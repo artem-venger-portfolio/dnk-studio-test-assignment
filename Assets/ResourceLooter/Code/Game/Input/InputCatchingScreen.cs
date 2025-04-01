@@ -3,15 +3,21 @@ using UnityEngine.EventSystems;
 
 namespace ResourceLooter
 {
-    public class InputCatchingScreen : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public class InputCatchingScreen : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler,
+                                       IDragHandler
     {
         public event ScreenPositionHandler Clicked;
         public event ScreenPositionHandler DragStarted;
         public event ScreenPositionHandler Dragging;
         public event ScreenPositionHandler DragFinished;
-        
+
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (eventData.dragging)
+            {
+                return;
+            }
+
             Clicked?.Invoke(eventData.position);
         }
 
