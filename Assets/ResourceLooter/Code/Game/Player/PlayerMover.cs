@@ -10,18 +10,18 @@ namespace ResourceLooter
         private readonly GroundPointFinder _groundPointFinder;
         private readonly ICoroutineController _coroutineController;
         private readonly CharacterController _characterController;
-        private readonly Transform _playerObject;
+        private readonly Transform _playerTransform;
         private readonly PlayerConfig _config;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
         private Coroutine _moveCoroutine;
         private Coroutine _rotateCoroutine;
 
-        public PlayerMover(Transform playerObject, CharacterController characterController,
-                           ClickAndDragDetector clickAndDragDetector, GroundPointFinder groundPointFinder,
-                           ICoroutineController coroutineController, PlayerConfig config)
+        public PlayerMover(CharacterController characterController, ClickAndDragDetector clickAndDragDetector, 
+                           GroundPointFinder groundPointFinder, ICoroutineController coroutineController, 
+                           PlayerConfig config)
         {
-            _playerObject = playerObject;
+            _playerTransform = characterController.transform;
             _characterController = characterController;
             _clickAndDragDetector = clickAndDragDetector;
             _groundPointFinder = groundPointFinder;
@@ -45,14 +45,13 @@ namespace ResourceLooter
 
         private Vector3 PlayerPosition
         {
-            get => _playerObject.position;
-            set => _playerObject.position = value;
+            get => _playerTransform.position;
         }
 
         private Quaternion PlayerRotation
         {
-            get => _playerObject.rotation;
-            set => _playerObject.rotation = value;
+            get => _playerTransform.rotation;
+            set => _playerTransform.rotation = value;
         }
 
         private void ClickEventHandler(Vector2 screenPosition)
@@ -92,7 +91,7 @@ namespace ResourceLooter
             var angleToTargetRotation = GetAngleToTargetRotation();
             var angleDelta = Mathf.Min(angleDeltaFromSpeedAndTime, angleToTargetRotation);
 
-            var rotationAxis = Vector3.Cross(_playerObject.forward, GetMoveDirection());
+            var rotationAxis = Vector3.Cross(_playerTransform.forward, GetMoveDirection());
             var rotationDelta = Quaternion.AngleAxis(angleDelta, rotationAxis);
 
             return rotationDelta;
