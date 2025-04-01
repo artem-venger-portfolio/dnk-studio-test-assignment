@@ -357,6 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9126309791253805955}
   - component: {fileID: 1728327326270635193}
+  - component: {fileID: 7084726167720503782}
   m_Layer: 0
   m_Name: BuildingUI
   m_TagString: Untagged
@@ -409,3 +410,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &7084726167720503782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956437581219715823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b9bc49045f4b1da3f6109c8108a092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameField: {fileID: 4907849204617008179}
+  _countField: {fileID: 5292387512652971290}
