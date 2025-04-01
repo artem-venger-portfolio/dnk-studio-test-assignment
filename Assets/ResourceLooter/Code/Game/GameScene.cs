@@ -43,7 +43,7 @@ namespace ResourceLooter
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
             var playerMover = new PlayerMover(_playerObject, _clickAndDragDetector, _groundPointFinder,
-                                              _coroutineController, _config);
+                                              _coroutineController, _config.PlayerConfig);
             var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _animator);
             _player = new Player(playerMover, playerAnimationSwitcher);
             _player.Enable();

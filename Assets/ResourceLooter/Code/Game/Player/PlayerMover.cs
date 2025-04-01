@@ -10,7 +10,7 @@ namespace ResourceLooter
         private readonly GroundPointFinder _groundPointFinder;
         private readonly ICoroutineController _coroutineController;
         private readonly Transform _playerObject;
-        private readonly IGameConfig _config;
+        private readonly PlayerConfig _config;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
         private Coroutine _moveCoroutine;
@@ -18,7 +18,7 @@ namespace ResourceLooter
 
         public PlayerMover(Transform playerObject, ClickAndDragDetector clickAndDragDetector,
                            GroundPointFinder groundPointFinder, ICoroutineController coroutineController,
-                           IGameConfig config)
+                           PlayerConfig config)
         {
             _playerObject = playerObject;
             _clickAndDragDetector = clickAndDragDetector;
@@ -86,8 +86,7 @@ namespace ResourceLooter
 
         private Quaternion GetRotationDelta()
         {
-            const float rotation_speed = 45f;
-            var angleDeltaFromSpeedAndTime = rotation_speed * Time.deltaTime;
+            var angleDeltaFromSpeedAndTime = _config.RotationSpeed * Time.deltaTime;
             var angleToTargetRotation = GetAngleToTargetRotation();
             var angleDelta = Mathf.Min(angleDeltaFromSpeedAndTime, angleToTargetRotation);
             var rotationDelta = Quaternion.AngleAxis(angleDelta, _playerObject.up);
@@ -117,7 +116,7 @@ namespace ResourceLooter
 
         private Vector3 GetMoveDelta()
         {
-            var distanceDeltaFromSpeedAndTime = _config.PlayerSpeed * Time.deltaTime;
+            var distanceDeltaFromSpeedAndTime = _config.MoveSpeed * Time.deltaTime;
             var distanceToTargetPosition = GetDistanceToTargetPosition();
             var distanceDelta = Mathf.Min(distanceDeltaFromSpeedAndTime, distanceToTargetPosition);
 
