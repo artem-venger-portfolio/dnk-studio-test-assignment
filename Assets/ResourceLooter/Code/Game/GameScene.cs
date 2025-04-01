@@ -48,6 +48,8 @@ namespace ResourceLooter
             _saveManager = new PlayerPrefsSaveManager();
             _saveManager.Load();
 
+            SetFrameRate();
+
             _coroutineController = CoroutineController.Create();
 
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
@@ -73,6 +75,14 @@ namespace ResourceLooter
             _hud.Initialize(_inventoryScreen, _settingsScreen);
             _inventoryScreen.Initialize(_inventory);
             _settingsScreen.Initialize(_saveManager);
+        }
+
+        private void SetFrameRate()
+        {
+            if (Application.isEditor == false)
+            {
+                Application.targetFrameRate = 60;
+            }
         }
 
         private void OnDisable()
