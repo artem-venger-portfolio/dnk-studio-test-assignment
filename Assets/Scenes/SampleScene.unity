@@ -234,7 +234,13 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _ground: {fileID: 1100961219}
   _playerObject: {fileID: 1318842048}
+  _animator: {fileID: 228560643}
   _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
+--- !u!95 &228560643 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4721943886271693966, guid: 7166087c57f18214f9cc1622ff2e3113, type: 3}
+  m_PrefabInstance: {fileID: 2605451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

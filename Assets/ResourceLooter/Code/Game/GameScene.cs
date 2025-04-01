@@ -17,6 +17,9 @@ namespace ResourceLooter
         private Transform _playerObject;
 
         [SerializeField]
+        private Animator _animator;
+
+        [SerializeField]
         private GameConfigSO _config;
 
         private ClickAndDragDetector _clickAndDragDetector;
