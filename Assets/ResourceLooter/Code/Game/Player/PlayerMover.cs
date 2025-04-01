@@ -49,12 +49,7 @@ namespace ResourceLooter
         {
             _targetPosition = _groundPointFinder.FindPointFromScreenPoint(screenPosition);
 
-            if (_coroutine != null)
-            {
-                _coroutineController.Stop(_coroutine);
-            }
-
-            _coroutine = _coroutineController.Run(GetMoveCoroutine());
+            _coroutine ??= _coroutineController.Run(GetMoveCoroutine());
         }
 
         private IEnumerator GetMoveCoroutine()
