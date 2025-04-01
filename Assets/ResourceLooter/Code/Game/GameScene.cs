@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ResourceLooter
 {
@@ -37,6 +38,7 @@ namespace ResourceLooter
         private CameraMover _cameraMover;
         private Inventory _inventory;
         private Player _player;
+        private ISaveManager _saveManager;
 
         private void Start()
         {
@@ -45,6 +47,9 @@ namespace ResourceLooter
 
         public void StartGame()
         {
+            _saveManager = new PlayerPrefsSaveManager();
+            _saveManager.Load();
+            
             _coroutineController = CoroutineController.Create();
 
             _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
@@ -73,6 +78,11 @@ namespace ResourceLooter
             _hud.Initialize(_inventoryScreen, _settingsScreen);
             _inventoryScreen.Initialize(_inventory);
             _settingsScreen.Initialize();
+        }
+
+        private void OnDisable()
+        {
+            _saveManager.Save();
         }
     }
 }
