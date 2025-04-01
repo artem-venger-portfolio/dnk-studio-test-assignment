@@ -45,7 +45,8 @@ namespace ResourceLooter
             var playerMover = new PlayerMover(_playerView.CharacterController, _clickAndDragDetector,
                                               _groundPointFinder, _coroutineController, _config.PlayerConfig);
             var playerAnimationSwitcher = new PlayerAnimationSwitcher(playerMover, _playerView.Animator);
-            _player = new Player(playerMover, playerAnimationSwitcher);
+            var resourceExtractor = new ResourceExtractor(_playerView);
+            _player = new Player(playerMover, playerAnimationSwitcher, resourceExtractor);
             _player.Enable();
 
             _cameraMover = new CameraMover(_clickAndDragDetector, _camera.transform, _coroutineController,
