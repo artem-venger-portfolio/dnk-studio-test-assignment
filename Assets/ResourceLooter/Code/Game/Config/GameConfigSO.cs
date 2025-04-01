@@ -13,5 +13,7 @@ namespace ResourceLooter
         public float PlayerSpeed => _config.PlayerSpeed;
 
         public float DragThreshold => _config.DragThreshold;
+
+        public CameraConfig CameraConfig => _config.CameraConfig;
     }
 }

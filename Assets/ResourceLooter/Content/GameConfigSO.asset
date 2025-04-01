@@ -15,3 +15,7 @@ MonoBehaviour:
   _config:
     PlayerSpeed: 5
     DragThreshold: 10
+    CameraConfig:
+      _followTime: 0.5
+      _minDecelerationVelocity: 0.5
+      _decelerationTime: 1
