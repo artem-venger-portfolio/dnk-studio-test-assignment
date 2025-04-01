@@ -33,7 +33,7 @@ namespace ResourceLooter
 
         private void Update()
         {
-            _elapsedTime = Time.deltaTime;
+            _elapsedTime += Time.deltaTime;
             if (_elapsedTime >= _config.ProductionTime)
             {
                 _elapsedTime -= _config.ProductionTime;
