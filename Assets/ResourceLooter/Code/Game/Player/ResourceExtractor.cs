@@ -50,6 +50,7 @@ namespace ResourceLooter
             {
                 foreach (var currentBuilding in _interactingBuildings)
                 {
+                    currentBuilding.PutResourcesToInventory();
                 }
 
                 yield return new WaitForSeconds(seconds: 0.2f);
