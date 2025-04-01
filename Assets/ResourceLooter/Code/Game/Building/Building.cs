@@ -23,6 +23,12 @@ namespace ResourceLooter
             ResourcesCount = 0;
         }
 
+        public override void PutResourcesToInventory()
+        {
+            _inventory.Modify(_produce, ResourcesCount);
+            ResourcesCount = 0;
+        }
+
         private int ResourcesCount
         {
             get => _resourcesCount;
