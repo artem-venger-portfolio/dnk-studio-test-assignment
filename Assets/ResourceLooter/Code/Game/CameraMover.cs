@@ -7,6 +7,7 @@ namespace ResourceLooter
     {
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly ICoroutineController _coroutineController;
+        private readonly Plane _ground;
         private readonly Camera _camera;
         private Coroutine _moveCoroutine;
         private Vector3 _startDragPosition;
@@ -15,10 +16,11 @@ namespace ResourceLooter
         private bool _isDragging;
 
         public CameraMover(ClickAndDragDetector clickAndDragDetector, Camera camera,
-                           ICoroutineController coroutineController)
+                           ICoroutineController coroutineController, Plane ground)
         {
             _clickAndDragDetector = clickAndDragDetector;
             _coroutineController = coroutineController;
+            _ground = ground;
             _camera = camera;
         }
 
