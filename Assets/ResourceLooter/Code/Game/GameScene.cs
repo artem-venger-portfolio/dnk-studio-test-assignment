@@ -28,6 +28,9 @@ namespace ResourceLooter
         [SerializeField]
         private InventoryScreen _inventoryScreen;
 
+        [SerializeField]
+        private SettingsScreen _settingsScreen;
+
         private ClickAndDragDetector _clickAndDragDetector;
         private ICoroutineController _coroutineController;
         private GroundPointFinder _groundPointFinder;
@@ -69,6 +72,7 @@ namespace ResourceLooter
 
             _hud.Initialize(_inventoryScreen);
             _inventoryScreen.Initialize(_inventory);
+            _settingsScreen.Initialize();
         }
     }
 }
