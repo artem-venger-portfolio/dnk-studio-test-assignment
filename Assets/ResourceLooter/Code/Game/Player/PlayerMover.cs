@@ -12,7 +12,9 @@ namespace ResourceLooter
         private readonly Transform _playerObject;
         private readonly IGameConfig _config;
         private Vector3 _targetPosition;
+        private Quaternion _targetRotation;
         private Coroutine _moveCoroutine;
+        private Coroutine _rotateCoroutine;
 
         public PlayerMover(Transform playerObject, ClickAndDragDetector clickAndDragDetector,
                            GroundPointFinder groundPointFinder, ICoroutineController coroutineController,
@@ -45,11 +47,52 @@ namespace ResourceLooter
             set => _playerObject.position = value;
         }
 
+        private Quaternion PlayerRotation
+        {
+            get => _playerObject.rotation;
+            set => _playerObject.rotation = value;
+        }
+
         private void ClickEventHandler(Vector2 screenPosition)
         {
             _targetPosition = _groundPointFinder.FindPointFromScreenPoint(screenPosition);
+            _targetRotation = GetTargetRotation();
 
             _moveCoroutine ??= _coroutineController.Run(GetMoveCoroutine());
+            _rotateCoroutine ??= _coroutineController.Run(GetRotateCoroutine());
+        }
+
+        private Quaternion GetTargetRotation()
+        {
+            return Quaternion.LookRotation(_targetPosition - PlayerPosition);
+        }
+
+        private IEnumerator GetRotateCoroutine()
+        {
+            const float acceptable_angle = 1f;
+
+            while (GetAngleToTargetRotation() > acceptable_angle)
+            {
+                PlayerRotation = GetRotationDelta() * PlayerRotation;
+                yield return null;
+            }
+            _rotateCoroutine = null;
+        }
+
+        private float GetAngleToTargetRotation()
+        {
+            return Quaternion.Angle(PlayerRotation, _targetRotation);
+        }
+
+        private Quaternion GetRotationDelta()
+        {
+            const float rotation_speed = 45f;
+            var angleDeltaFromSpeedAndTime = rotation_speed * Time.deltaTime;
+            var angleToTargetRotation = GetAngleToTargetRotation();
+            var angleDelta = Mathf.Min(angleDeltaFromSpeedAndTime, angleToTargetRotation);
+            var rotationDelta = Quaternion.AngleAxis(angleDelta, _playerObject.up);
+
+            return rotationDelta;
         }
 
         private IEnumerator GetMoveCoroutine()
