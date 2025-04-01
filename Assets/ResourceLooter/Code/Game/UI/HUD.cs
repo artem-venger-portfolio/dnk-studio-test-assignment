@@ -11,8 +11,11 @@ namespace ResourceLooter
         [SerializeField]
         private Button _inventoryButton;
 
-        public void Initialize()
+        private InventoryScreen _inventoryScreen;
+
+        public void Initialize(InventoryScreen inventoryScreen)
         {
+            _inventoryScreen = inventoryScreen;
             _settingsButton.onClick.AddListener(SettingsButtonClickedEventHandler);
             _inventoryButton.onClick.AddListener(InventoryButtonClickedEventHandler);
         }
@@ -23,6 +26,7 @@ namespace ResourceLooter
 
         private void InventoryButtonClickedEventHandler()
         {
+            _inventoryScreen.Open();
         }
     }
 }

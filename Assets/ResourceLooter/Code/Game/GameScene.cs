@@ -67,6 +67,7 @@ namespace ResourceLooter
                 currentBuilding.Initialize(_inventory, _config);
             }
 
+            _hud.Initialize(_inventoryScreen);
             _inventoryScreen.Initialize(_inventory);
         }
     }
