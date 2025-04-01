@@ -105,7 +105,8 @@ namespace ResourceLooter
 
         private bool CanStartDragging()
         {
-            return _isButtonPressed && _isDragging == false && IsDragDistanceExceedThreshold();
+            return _isButtonPressed && _isDragging == false && IsPointerOverUI() == false && 
+                   IsDragDistanceExceedThreshold();
         }
 
         private bool IsDragDistanceExceedThreshold()
