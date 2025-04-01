@@ -29,15 +29,5 @@ namespace ResourceLooter
             _count = value;
             _countField.name = _count.ToString();
         }
-
-        public void Show()
-        {
-            gameObject.SetActive(value: true);
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(value: false);
-        }
     }
 }
