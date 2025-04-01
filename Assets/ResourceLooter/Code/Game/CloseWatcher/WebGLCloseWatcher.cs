@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace System
@@ -19,6 +20,7 @@ namespace System
         [DllImport(dllName: "__Internal")]
         private static extern void RegisterCloseHandler();
 
+        [UsedImplicitly]
         private void OnWebGLClose()
         {
             Closing?.Invoke();
