@@ -101,7 +101,8 @@ namespace ResourceLooter
 
             var acceleration = Vector3.zero;
             const float max_acceleration = float.PositiveInfinity;
-            while (_velocity.magnitude > _config.MinDecelerationVelocity)
+            const float min_deceleration_velocity = 0.5f;
+            while (_velocity.magnitude > min_deceleration_velocity)
             {
                 var deltaTime = Time.deltaTime;
                 CameraPosition += _velocity * deltaTime;
