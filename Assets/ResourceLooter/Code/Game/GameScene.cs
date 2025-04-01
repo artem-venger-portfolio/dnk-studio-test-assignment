@@ -42,7 +42,7 @@ namespace ResourceLooter
             _groundPlane = new Plane(_ground.up, _ground.position);
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
-            _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _groundPlane);
+            _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _groundPointFinder);
             _movePositionProvider.Enable();
 
             var playerMover = new PlayerMover(_playerObject, _movePositionProvider, _coroutineController, _config);
