@@ -167,6 +167,7 @@ MonoBehaviour:
   _camera: {fileID: 330585545}
   _ground: {fileID: 1100961219}
   _playerObject: {fileID: 1318842048}
+  _characterController: {fileID: 2011686140}
   _animator: {fileID: 228560643}
   _config: {fileID: 11400000, guid: a6fb3fda644e9dc49a690460b16c0151, type: 2}
 --- !u!4 &228560642 stripped
@@ -578,6 +579,11 @@ Transform:
   - {fileID: 228560642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &2011686140 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1317766777402477963, guid: a90430005d718c64fb5dd01d301d68bb, type: 3}
+  m_PrefabInstance: {fileID: 2110438779985275481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2078388636
 GameObject:
   m_ObjectHideFlags: 0

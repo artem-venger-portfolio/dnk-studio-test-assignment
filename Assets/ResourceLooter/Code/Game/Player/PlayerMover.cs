@@ -9,6 +9,7 @@ namespace ResourceLooter
         private readonly ClickAndDragDetector _clickAndDragDetector;
         private readonly GroundPointFinder _groundPointFinder;
         private readonly ICoroutineController _coroutineController;
+        private readonly CharacterController _characterController;
         private readonly Transform _playerObject;
         private readonly PlayerConfig _config;
         private Vector3 _targetPosition;
@@ -16,11 +17,12 @@ namespace ResourceLooter
         private Coroutine _moveCoroutine;
         private Coroutine _rotateCoroutine;
 
-        public PlayerMover(Transform playerObject, ClickAndDragDetector clickAndDragDetector,
-                           GroundPointFinder groundPointFinder, ICoroutineController coroutineController,
-                           PlayerConfig config)
+        public PlayerMover(Transform playerObject, CharacterController characterController,
+                           ClickAndDragDetector clickAndDragDetector, GroundPointFinder groundPointFinder,
+                           ICoroutineController coroutineController, PlayerConfig config)
         {
             _playerObject = playerObject;
+            _characterController = characterController;
             _clickAndDragDetector = clickAndDragDetector;
             _groundPointFinder = groundPointFinder;
             _coroutineController = coroutineController;
