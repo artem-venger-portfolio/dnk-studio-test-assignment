@@ -27,7 +27,7 @@ namespace ResourceLooter
         public void SetCount(int value)
         {
             _count = value;
-            _countField.name = _count.ToString();
+            _countField.text = _count.ToString();
         }
     }
 }
