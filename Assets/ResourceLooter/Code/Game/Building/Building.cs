@@ -10,12 +10,14 @@ namespace ResourceLooter
         [SerializeField]
         private BuildingUI _ui;
 
+        private Inventory _inventory;
         private int _resourcesCount;
         private IGameConfig _config;
         private float _elapsedTime;
 
-        public override void Initialize(IGameConfig config)
+        public override void Initialize(Inventory inventory, IGameConfig config)
         {
+            _inventory = inventory;
             _config = config;
             _ui.SetName(_produce);
             ResourcesCount = 0;

@@ -58,7 +58,7 @@ namespace ResourceLooter
 
             foreach (var currentBuilding in _buildings)
             {
-                currentBuilding.Initialize(_config);
+                currentBuilding.Initialize(_inventory, _config);
             }
         }
     }

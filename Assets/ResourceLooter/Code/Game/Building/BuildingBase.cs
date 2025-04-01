@@ -4,6 +4,6 @@ namespace ResourceLooter
 {
     public abstract class BuildingBase : MonoBehaviour
     {
-        public abstract void Initialize(IGameConfig config);
+        public abstract void Initialize(Inventory inventory, IGameConfig config);
     }
 }
