@@ -25,7 +25,6 @@ namespace ResourceLooter
         private GroundPointFinder _groundPointFinder;
         private CameraMover _cameraMover;
         private Player _player;
-        private Plane _groundPlane;
 
         private void Start()
         {
@@ -39,7 +38,6 @@ namespace ResourceLooter
             _clickAndDragDetector = new ClickAndDragDetector(_inputReceiver, _config);
             _clickAndDragDetector.Enable();
 
-            _groundPlane = new Plane(_ground.up, _ground.position);
             _groundPointFinder = new GroundPointFinder(_ground, _camera);
 
             _movePositionProvider = new MovePositionProvider(_clickAndDragDetector, _camera, _groundPointFinder);
