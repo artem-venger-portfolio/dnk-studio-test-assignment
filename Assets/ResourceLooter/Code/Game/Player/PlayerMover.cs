@@ -64,7 +64,7 @@ namespace ResourceLooter
 
         private Quaternion GetTargetRotation()
         {
-            return Quaternion.LookRotation(_targetPosition - PlayerPosition);
+            return Quaternion.LookRotation(GetMoveDirection());
         }
 
         private IEnumerator GetRotateCoroutine()
@@ -120,11 +120,18 @@ namespace ResourceLooter
             var distanceToTargetPosition = GetDistanceToTargetPosition();
             var distanceDelta = Mathf.Min(distanceDeltaFromSpeedAndTime, distanceToTargetPosition);
 
-            var direction = _targetPosition - PlayerPosition;
-            direction.Normalize();
+            var direction = GetMoveDirection();
             var moveDelta = direction * distanceDelta;
 
             return moveDelta;
+        }
+
+        private Vector3 GetMoveDirection()
+        {
+            var direction = _targetPosition - PlayerPosition;
+            direction.Normalize();
+
+            return direction;
         }
     }
 }
