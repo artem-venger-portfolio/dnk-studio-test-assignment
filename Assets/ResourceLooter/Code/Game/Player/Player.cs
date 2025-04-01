@@ -1,26 +1,26 @@
-﻿using UnityEngine;
-
-namespace ResourceLooter
+﻿namespace ResourceLooter
 {
     public class Player
     {
         private readonly PlayerMover _playerMover;
-        private readonly Animator _animator;
+        private readonly PlayerAnimationSwitcher _animationSwitcher;
 
-        public Player(PlayerMover playerMover, Animator animator)
+        public Player(PlayerMover playerMover, PlayerAnimationSwitcher animationSwitcher)
         {
             _playerMover = playerMover;
-            _animator = animator;
+            _animationSwitcher = animationSwitcher;
         }
 
         public void Enable()
         {
             _playerMover.Enable();
+            _animationSwitcher.Enable();
         }
 
         public void Disable()
         {
             _playerMover.Disable();
+            _animationSwitcher.Disable();
         }
     }
 }
