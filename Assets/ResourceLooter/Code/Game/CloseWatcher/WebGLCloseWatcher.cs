@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿#if UNITY_WEBGL && !UNITY_EDITOR
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -27,3 +28,4 @@ namespace System
         }
     }
 }
+#endif
