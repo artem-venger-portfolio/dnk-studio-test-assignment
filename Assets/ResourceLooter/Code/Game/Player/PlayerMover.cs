@@ -104,7 +104,8 @@ namespace ResourceLooter
             const float acceptable_distance = 0.0001f;
             while (GetDistanceToTargetPosition() > acceptable_distance)
             {
-                PlayerPosition += GetMoveDelta();
+                var motion = GetMoveDelta();
+                _characterController.Move(motion);
                 yield return null;
             }
 
